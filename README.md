@@ -1,6 +1,6 @@
 # 3-147-42-January-May-2023
 
-## Contributors
+## Contributors (3/42)
 
 - https://github.com/reengine	- Амелин Игорь
 - https://github.com/anCreny - Бояркин Артем
