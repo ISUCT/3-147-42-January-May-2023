@@ -34,7 +34,7 @@
 - https://github.com/Greenprize - Кирилл Шестаков
 - https://github.com/pkubysheva - Полина Кубышева
 - https://github.com/Dasfor - Илья Дунайцев
-- https://github.com/Anastasiya - Odintsova	Анастасия Одинцова
+- https://github.com/Anastasiya-Odintsova	- Анастасия Одинцова
 - https://github.com/Nikrybkin - Никита Рыбкин
 - https://github.com/Natalya1820 - Наталья Курило
 - https://github.com/Unp1ugged - Денис Афонин
