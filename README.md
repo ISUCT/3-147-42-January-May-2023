@@ -19,6 +19,7 @@
 - https://github.com/markru37 - Румянцев Марк
 - https://github.com/San1k-02	- Селезнев Александр
 - https://github.com/s1max - Силин Максим
+- https://github.com/Koolec - Федор Томаш
 - https://github.com/anihsort - Трошина Варвара
 
 ## Contributors (3/147)
