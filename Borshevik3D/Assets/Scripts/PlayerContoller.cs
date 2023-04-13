@@ -11,6 +11,7 @@ namespace Borshevik.PlayerControl
         [SerializeField] private Transform CameraRoot;
         [SerializeField] private Transform Camera;
         [SerializeField] private GameObject Weapon;
+        [SerializeField] private Collider WeaponLine;
         [SerializeField] private float UpperLimit = -40f;
         [SerializeField] private float BottomLimit = 70f;
         [SerializeField] private float MouseSensitivity = 21.9f;
@@ -191,9 +192,11 @@ namespace Borshevik.PlayerControl
             if(_inputManager.Slash)
             {
                 _animator.SetTrigger(_slashHash);
+                WeaponLine.GetComponent<CapsuleCollider>().enabled = true;
                 return;
             }
             _animator.ResetTrigger(_slashHash);
+            WeaponLine.GetComponent<CapsuleCollider>().enabled = false;
         }
     }
 }
