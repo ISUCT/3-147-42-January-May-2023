@@ -1,0 +1,34 @@
+{
+  "Id": "SurveyId",
+  "Title" : "SurveyTitle",
+  "Questions": [
+    {
+      "Id": "QuestionId",
+      "Text": "QuestionText",
+      "Visibility": [
+        {"Position": "RoleInProject"},
+        {"Position": "RoleInProject"},
+        {"Position": "RoleInProject"},
+        {"Position": "RoleInProject"},
+        {"Position": "RoleInProject"}
+      ],
+      "Type": 0
+    },
+    {
+      "Id": "QuestionId",
+      "Text": "QuestionText",
+      "Visibility": [
+        {"Position": "RoleInProject"},
+        {"Position": "RoleInProject"}
+      ],
+      "Type": 1,
+      "PossibleAnswers": [
+        {"PossibleAnswerText": "AnswerText"},
+        {"PossibleAnswerText": "AnswerText"},
+        {"PossibleAnswerText": "AnswerText"},
+        {"PossibleAnswerText": "AnswerText"},
+        {"PossibleAnswerText": "AnswerText"}
+      ]
+    }
+  ]
+}

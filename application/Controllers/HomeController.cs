@@ -1,31 +1,58 @@
-﻿using System.Diagnostics;
+﻿using application.Additionals;
 using Microsoft.AspNetCore.Mvc;
 using application.Models;
-
 namespace application.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly DatabaseContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public async Task Index()
     {
-        _logger = logger;
+        await HttpContext.Response.SendFileAsync("wwwroot/Surveys.html");
     }
 
-    public IActionResult Index()
+    public HomeController(DatabaseContext db)
     {
-        return View();
+        _db = db;
     }
 
-    public IActionResult Privacy()
+    public IActionResult Get(int? id)
     {
-        return View();
+        if (id is not null)
+        {
+            var questionStrings = _db.Questions.Where(q => q.Id == id).ToList();
+            if (questionStrings.Count > 0)
+            {
+                var questionString = questionStrings[0];
+                return Content($"[{questionString.Id}] {questionString.Text}");
+            }
+            return Content($"There are no strings with that id :(");
+        }
+
+        var responseString = "Questions: \n";
+
+        var questions = _db.Questions.ToList();
+        foreach (var question in questions)
+        {
+            responseString += $"[{question.Id}] {question.Text} {question.Type} \n";
+        }
+
+        return Content(responseString);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public async Task<IActionResult> Add(string? text)
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        if (text is not null)
+        {
+            var question = new Question();
+            question.Text = text;
+            question.Type = 0;
+            _db.Questions.Add(question);
+            await _db.SaveChangesAsync();
+            return Content($"New string has been added successfully");
+        }
+
+        return Content("Smth went wrong :(");
     }
 }
