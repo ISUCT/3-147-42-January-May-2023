@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta name="que" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" type="text/javascript" href="java.js"> 
+		<title>Опросник</title>
+	</head>
+
+	<body> 
+			<div class="box">
+				<button onclick="document.getElementById('id01').style.display='flex'" class="btn">+</button>
+			</div>
+			<canvas id="canvas">
+      
+    </canvas>
+
+			<script type="text/javascript">
+     let c = init("canvas"),
+  w = (canvas.width = window.innerWidth),
+  h = (canvas.height = window.innerHeight);
+//initiation
+
+class firefly{
+  constructor(){
+    this.x = Math.random()*w;
+    this.y = Math.random()*h;
+    this.s = Math.random()*2;
+    this.ang = Math.random()*2*Math.PI;
+    this.v = this.s*this.s/4;
+  }
+  move(){
+    this.x += this.v*Math.cos(this.ang);
+    this.y += this.v*Math.sin(this.ang);
+    this.ang += Math.random()*20*Math.PI/180-10*Math.PI/180;
+  }
+  show(){
+    c.beginPath();
+    c.arc(this.x,this.y,this.s,0,2*Math.PI);
+    c.fillStyle="#fddba3";
+    c.fill();
+  }
+}
+
+let f = [];
+
+function draw() {
+  if(f.length < 100){
+    for(let j = 0; j < 10; j++){
+     f.push(new firefly());
+  }
+     }
+  //animation
+  for(let i = 0; i < f.length; i++){
+    f[i].move();
+    f[i].show();
+    if(f[i].x < 0 || f[i].x > w || f[i].y < 0 || f[i].y > h){
+       f.splice(i,1);
+       }
+  }
+}
+
+let mouse = {};
+let last_mouse = {};
+
+canvas.addEventListener(
+  "mousemove",
+  function(e) {
+    last_mouse.x = mouse.x;
+    last_mouse.y = mouse.y;
+
+    mouse.x = e.pageX - this.offsetLeft;
+    mouse.y = e.pageY - this.offsetTop;
+  },
+  false
+);
+function init(elemid) {
+  let canvas = document.getElementById(elemid),
+    c = canvas.getContext("2d"),
+    w = (canvas.width = window.innerWidth),
+    h = (canvas.height = window.innerHeight);
+  c.fillStyle = "rgba(30,30,30,1)";
+  c.fillRect(0, 0, w, h);
+  return c;
+}
+
+window.requestAnimFrame = (function() {
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(callback) {
+      window.setTimeout(callback);
+    }
+  );
+});
+
+function loop() {
+  window.requestAnimFrame(loop);
+  c.clearRect(0, 0, w, h);
+  draw();
+}
+
+window.addEventListener("resize", function() {
+  (w = canvas.width = window.innerWidth),
+  (h = canvas.height = window.innerHeight);
+  loop();
+});
+
+loop();
+setInterval(loop, 1000 / 60);   
+      </script>
+<div id="id01" class="modal" style="display: none;">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">back</span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>Question</h1>
+      <hr>
+      <label for="quest"></label>
+      <input type="text" placeholder="Enter Question text" name="quest" required>
+
+      <div class="custom-select" style="width:200px;">
+  <select>
+    <option value="0">Specify team:</option>
+    <option value="1">Game</option>
+    <option value="2">Questionnaire</option>
+    <option value="3">Tester</option>
+    <option value="4">Design</option>
+  </select>
+</div>
+<div class="tuty">
+     Single-C: <input type="checkbox" id="myCheck" onclick="myFunction()">
+     <p id="text" style="display:none"> <input type="text" placeholder="Possible answers" name="quest" required>
+      <label for="quest" class="roa"></label>
+      <input type="checkbox" name="1">
+      <input type="text" placeholder="Possible answers" name="quest" required>
+<input type="checkbox" name="2">
+      <label for="quest"></label>
+      <input type="text" placeholder="Possible answers" name="quest" required>
+      <input type="checkbox" name="3">
+      <label for="quest"></label>
+      <input type="text" placeholder="Possible answers" name="quest" required>
+      <input type="checkbox" name="4">
+      <div class="clearfix"></p>
+</div>
+
+     
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+	function myFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("myCheck");
+  // Get the output text
+  var text = document.getElementById("text");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+</script>
+<script>
+var modal = document.getElementById('id01');  
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+<script type="text/javascript">var x, i, j, l, ll, selElmnt, a, b, c;
+
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.nextSibling.classList.toggle("select-hide");
+    this.classList.toggle("select-arrow-active");
+  });
+}
+
+function closeAllSelect(elmnt) {
+
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+
+document.addEventListener("click", closeAllSelect);</script>
+	</body>
+
+	</html>	
