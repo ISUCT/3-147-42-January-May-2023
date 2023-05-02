@@ -1733,6 +1733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseModel
       objectReference: {fileID: 0}
+    - target: {fileID: 3708528435561823257, guid: 1432117f560974b8ca9b7fce23d4c05a, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 4052261486698473132, guid: 1432117f560974b8ca9b7fce23d4c05a, type: 3}
       propertyPath: m_RootOrder
       value: 3
