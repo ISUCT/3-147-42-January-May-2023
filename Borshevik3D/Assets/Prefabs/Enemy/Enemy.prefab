@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitsToDeath: 1
+  data: {fileID: 0}
 --- !u!1001 &4144362697558977522
 PrefabInstance:
   m_ObjectHideFlags: 0
