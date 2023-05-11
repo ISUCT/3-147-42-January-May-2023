@@ -1,33 +1,72 @@
 {
-  "Id": "SurveyId",
+  "Id": 1,
   "Title" : "SurveyTitle",
   "Questions": [
     {
-      "Id": "QuestionId",
+      "Id": 1,
       "Text": "QuestionText",
       "Visibility": [
-        {"Position": "RoleInProject"},
-        {"Position": "RoleInProject"},
-        {"Position": "RoleInProject"},
-        {"Position": "RoleInProject"},
-        {"Position": "RoleInProject"}
+        {
+          "Id": 1,
+          "Text": "RoleInProject"},
+        {
+          "Id": 2,
+          "Text": "RoleInProject"},
+        {
+          "Id": 3,
+          "Text": "RoleInProject"},
+        {
+          "Id": 4,
+          "Text": "RoleInProject"},
+        {
+          "Id": 5,
+          "Text": "RoleInProject"}
       ],
-      "Type": 0
+      "Type": 0,
+      "Answers": null
     },
     {
-      "Id": "QuestionId",
+      "Id": 2,
       "Text": "QuestionText",
       "Visibility": [
-        {"Position": "RoleInProject"},
-        {"Position": "RoleInProject"}
+        {
+          "Id": 6,
+          "Position": "RoleInProject"},
+        {
+          "Id": 7,
+          "Position": "RoleInProject"}
       ],
       "Type": 1,
       "PossibleAnswers": [
-        {"PossibleAnswerText": "AnswerText"},
-        {"PossibleAnswerText": "AnswerText"},
-        {"PossibleAnswerText": "AnswerText"},
-        {"PossibleAnswerText": "AnswerText"},
-        {"PossibleAnswerText": "AnswerText"}
+        {
+          "Id": 1,
+          "Text": "PossibleAnswerText"},
+        {
+          "Id": 1,
+          "Text": "PossibleAnswerText"},
+        {
+          "Id": 1,
+          "Text": "PossibleAnswerText"},
+        {
+          "Id": 1,
+          "Text": "PossibleAnswerText"},
+        {
+          "Id": 1,
+          "Text": "PossibleAnswerText"}
+      ],
+      "Answers": [
+        {
+          "Id": 1,
+          "Text": "AnswerText"
+        },
+        {
+          "Id": 2,
+          "Text": "AnswerText"
+        },
+        {
+          "Id": 3,
+          "Text": "AnswerText"
+        }
       ]
     }
   ]

@@ -7,14 +7,7 @@ namespace application.Additionals;
 public class DatabaseContext : DbContext
 {
     public DbSet<Survey> Surveys { get; set; } = null!;
-    public DbSet<SurveyNQuestion> SurveyNQuestions { get; set; } = null!;
     
-    public DbSet<Question> Questions { get; set; } = null!;
-    public DbSet<QuestionVisibility> QuestionVisibilities { get; set; } = null!;
-    public DbSet<PossibleAnswer> PossibleAnswers { get; set; } = null!;
-
-    public DbSet<Answer> Answers { get; set; } = null!;
-
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
         Database.EnsureCreated();

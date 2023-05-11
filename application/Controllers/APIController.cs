@@ -1,6 +1,4 @@
-using System.Text.Json;
 using application.Additionals;
-using application.Additionals.Connectors.FromConnectors;
 using application.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,43 +8,39 @@ namespace application.Controllers;
 public class APIController : Controller
 {
     private DatabaseContext _db;
-    private FromConnectorService _fromDb;
-    private ToConnectorService _toDb;
-    private JsonSerializerOptions _options;
-
-    public APIController(DatabaseContext db, FromConnectorService fromDb, ToConnectorService toDb)
+    
+    public APIController(DatabaseContext db)
     {
         _db = db;
-        _fromDb = fromDb;
-        _toDb = toDb;
-        _options.Converters.Add(new SurveySerializer());
     }
 
     public async Task<IActionResult> GetSurvey(int? id)
     {
         if (id is not null)
         {
-            var surveyModel = await _fromDb.TranslateFromDatabaseFirstOrDefault(id.Value);
-            if (surveyModel is null)
+            var survey = await _db.Surveys.FirstOrDefaultAsync(s => s.Id == id);
+            
+            if (survey is null)
             {
                 return NotFound();
             }
             
-            return Json(surveyModel, _options);
+            return Json(survey);
         }
 
-        var surveyModels = await _fromDb.TranslateFromDatabaseAll();
+        var surveys = await _db.Surveys.ToListAsync();
 
-        return Json(surveyModels, _options);
+        return Json(surveys);
     }
 
     public async Task<IActionResult> AddSurvey()
     {
-        var surveyModel = await HttpContext.Request.ReadFromJsonAsync<SurveyModel>(_options);
+        var survey = await HttpContext.Request.ReadFromJsonAsync<Survey>();
         
-        if (surveyModel is not null)
+        if (survey is not null)
         {
-            await _toDb.TranslateToDatabaseAsync(surveyModel);
+            _db.Surveys.Add(survey);
+            await _db.SaveChangesAsync();
             return Ok();
         }
 
@@ -55,25 +49,34 @@ public class APIController : Controller
 
     public async Task<IActionResult> UpdateSurvey()
     {
-        var surveyModel = await HttpContext.Request.ReadFromJsonAsync<SurveyModel>(_options);
+        var survey = await HttpContext.Request.ReadFromJsonAsync<Survey>();
 
-        var updatedSurveyModel = await _toDb.UpdateToDatabaseAsync(surveyModel);
+        if (survey is not null)
+        {
+            _db.Surveys.Update(survey);
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
 
-        return Json(updatedSurveyModel, _options);
+        return StatusCode(204);
+
     }
 
     public async Task<IActionResult> DeleteSurvey(int? id)
     {
-        if (id is null)
+        if (id is not null)
         {
-            return NotFound();
+            var survey = await _db.Surveys.FirstOrDefaultAsync(s => s.Id == id);
+            if (survey is not null)
+            {
+                _db.Surveys.Remove(survey);
+                await _db.SaveChangesAsync();
+                return Ok();
+            }
         }
 
-        var result = await _toDb.DeleteToDatabaseAsync(id.Value);
-        if (!result)
-        {
-            return NotFound();
-        }
-        return Ok();
+
+
+        return NotFound();
     }
 }

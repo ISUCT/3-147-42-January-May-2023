@@ -1,47 +1,114 @@
-# 3-147-42-January-May-2023
+## Author of the solution
 
-## Contributors (3/42)
+Boyarkin Artem 3/42
 
-- https://github.com/reengine	- Амелин Игорь
-- https://github.com/anCreny - Бояркин Артем
-- https://github.com/Bugfasov	- Бугасов Степан
-- https://github.com/alexthvest	- Голубев Даниил
-- https://github.com/Eelizaveta	- Ермакова Елизавета
-- https://github.com/karneevmi - Карнеев Михаил
-- https://github.com/sanya_kirilv	- Кириллов Александр
-- https://github.com/SunM1sty	- Кожухарь Владимир
-- https://github.com/carlosck3 - Лумана Карлос
-- https://github.com/dmitriy-malakhov	- Малахов Дмитрий
-- https://github.com/PavlovYuri - Павлов Юрий
-- https://github.com/Auzet - Полехин Алексей
-- https://github.com/Ruslan-Polakov - Поляков Руслан
-- https://github.com/progonskaij - Прогонская Анастасия
-- https://github.com/markru37 - Румянцев Марк
-- https://github.com/San1k-02	- Селезнев Александр
-- https://github.com/s1max - Силин Максим
-- https://github.com/anihsort - Трошина Варвара
 
-## Contributors (3/147)
+## Installation
 
-- https://github.com/swbonjour - Кирилл Копров
-- https://github.com/Irina1411 - Ирина Ильинцева
-- https://github.com/vladmet1 - Владислав Метелев
-- https://github.com/LenaNaumova - Елена Наумова
-- https://github.com/Zick3223 - Руслан Арибжанов
-- https://github.com/Kislota1 - Олег Ларин
-- https://github.com/GeroiGorodskoyZastroiki - Даниил Ойкин
-- https://github.com/lapshal - Александр Лапшин
-- https://github.com/Greenprize - Кирилл Шестаков
-- https://github.com/pkubysheva - Полина Кубышева
-- https://github.com/Dasfor - Илья Дунайцев
-- https://github.com/Anastasiya-Odintsova	- Анастасия Одинцова
-- https://github.com/Nikrybkin - Никита Рыбкин
-- https://github.com/Natalya1820 - Наталья Курило
-- https://github.com/Unp1ugged - Денис Афонин
-- https://github.com/b1hh1 - Никита Кононов
-- https://github.com/Kooperatorko - Татьяна Молчанова
-- https://github.com/Borshecs - Алексей Субботин
-- https://github.com/DustofTimeYT - Михаил Смирнов
-- https://github.com/solnyshk0 - Светлана Крылова
-- https://github.com/liza2307 - Елизавета Шляева
-- https://github.com/Uzhastin-Nikita - Никита Ужастин
+# Open terminal in any folder u want to use and then
+1. git clone https://github.com/ISUCT/3-147-42-January-May-2023/tree/Survey_Backend
+2. cd 3-147-42-January-May-2023
+3. docker-compose up
+after you can find API on http://localhost/Api/{your command}
+
+# Requirements
+1. Docker/docker-compose installed
+2. Git installed
+
+# PS
+If u want to change ip or port, u should edit launchSettings.json file (u can find it at ~/3-147-42-January-May-2023/application/Properties/)
+
+
+## How u can use this backend(commands)
+
+# Common ways
+Add survey - .../AddSurvey (with appropriate json) -> OK|Code 204(if json is not appropriate)
+Get survey/s - .../GetSurvey (if u want to get only one survey, just add "id" in query: .../GetSurvey?id=0) -> OK|NotFound(404)
+Update survey - .../UpdateSurvey (with appropriate json) -> OK|Code 204(if json is not appropriate)
+Delete survey - .../DeleteSurvey?id=0 (0 is example) -> OK|NotFound(404)
+
+# Uncommon ways
+Any Question in questions array in json, that u received, has field Answers.
+It can be NULL or array with appropriate answers and then u can send only answers
+array with SurveyUpdate API method to link answers with Survey in database.
+In the same way you can read only answers array from received json.
+
+# JSON example
+```json
+{
+    "Id": 1,
+    "Title" : "SurveyTitle",
+    "Questions": [
+    {
+        "Id": 1,
+        "Text": "QuestionText",
+        "Visibility": [
+        {
+            "Id": 1,
+            "Text": "RoleInProject"},
+            {
+                "Id": 2,
+                "Text": "RoleInProject"},
+                {
+                    "Id": 3,
+                    "Text": "RoleInProject"},
+                    {
+                        "Id": 4,
+                        "Text": "RoleInProject"},
+                        {
+                            "Id": 5,
+                            "Text": "RoleInProject"}
+                            ],
+                            "Type": 0,
+                            "Answers": null
+                        },
+                        {
+                            "Id": 2,
+                            "Text": "QuestionText",
+                            "Visibility": [
+                            {
+                                "Id": 6,
+                                "Position": "RoleInProject"},
+                                {
+                                    "Id": 7,
+                                    "Position": "RoleInProject"}
+                                    ],
+                                    "Type": 1,
+                                    "PossibleAnswers": [
+                                    {
+                                        "Id": 1,
+                                        "Text": "PossibleAnswerText"},
+                                        {
+                                            "Id": 1,
+                                            "Text": "PossibleAnswerText"},
+                                            {
+                                                "Id": 1,
+                                                "Text": "PossibleAnswerText"},
+                                                {
+                                                    "Id": 1,
+                                                    "Text": "PossibleAnswerText"},
+                                                    {
+                                                        "Id": 1,
+                                                        "Text": "PossibleAnswerText"}
+                                                        ],
+                                                        "Answers": [
+                                                        {
+                                                            "Id": 1,
+                                                            "Text": "AnswerText"
+                                                        },
+                                                        {
+                                                            "Id": 2,
+                                                            "Text": "AnswerText"
+                                                        },
+                                                        {
+                                                            "Id": 3,
+                                                            "Text": "AnswerText"
+                                                        }
+                                                        ]
+                                                    }
+                                                    ]
+                                                }
+                                                ```
+                                                Also u can find JSON example at ~/3-147-42-January-May-2023/application/Examples/SurveyExample.json
+
+
