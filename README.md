@@ -9,6 +9,7 @@ Boyarkin Artem 3/42
 1. git clone https://github.com/ISUCT/3-147-42-January-May-2023/tree/Survey_Backend
 2. cd 3-147-42-January-May-2023
 3. docker-compose up
+
 after you can find API on http://localhost/Api/{your_command}
 
 ## Requirements
